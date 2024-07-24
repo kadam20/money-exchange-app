@@ -1,0 +1,13 @@
+<div class="card flex flex-col justify-between">
+  <h1>History of your favourite currency</h1>
+  <div>
+    <p-selectButton
+      [options]="stateOptions"
+      [(ngModel)]="value"
+      optionLabel="label"
+      optionValue="value"
+      styleClass="text-xs"
+    />
+  </div>
+  <p-chart type="line" [data]="data" [options]="options" />
+</div>
