@@ -1,7 +1,7 @@
 <div class="card">
     <h1>Currencies</h1>
-   @if(currencies){
-    <p-table [value]="currencies" styleClass="p-datatable-sm text-xs">
+   @if(currencies$()){
+    <p-table [value]="currencies$()" styleClass="p-datatable-sm text-xs">
         <ng-template pTemplate="header">
             <tr>
                 <th>Flag</th>
@@ -12,10 +12,10 @@
         </ng-template>
         <ng-template pTemplate="body" let-currency>
             <tr>
-                <td> <span [class]="currency.flag"></span></td>
+                <td><span [class]="currency.flag"></span></td>
                 <td>{{ currency.name }}</td>
                 <td>{{ currency.sign }}</td>
-                <td><p-button icon="pi pi-heart" [rounded]="true" severity="danger" [text]="true" /></td>
+                <td><p-button [icon]="currency.isFavorite ? 'pi pi-heart-fill': 'pi pi-heart'" [rounded]="true" severity="danger" [text]="true" /></td>
             </tr>
         </ng-template>
     </p-table>

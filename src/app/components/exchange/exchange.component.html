@@ -1,42 +1,17 @@
-<form
-  [formGroup]="exchangeForm"
-  (ngSubmit)="convert()"
-  class="flex flex-col card"
->
-<h1>Exchange</h1>
-  <div class="flex flex-row gap-5">
-    <div>
-      <label for="from" class="font-bold block"> From </label>
-      <p-dropdown
-        formControlName="from"
-        [options]="cities"
-        optionLabel="name"
-        placeholder="Select a City"
-      />
-    </div>
-    
-  <div>
-    <label for="amount" class="font-bold block"> Amount </label>
-    <p-inputNumber inputId="amount" formControlName="amount" class="w-full" />
-  </div>
+@if(currencies$()){
+  <div class="card flex flex-col justify-between">
+    <h1>Exchange</h1>
+<div class="flex flex-row gap-5">
+  <exchange-input
+    [currencies]="currencies$()" 
+    [formGroupRef]="exchangeForm().controls['fromGroup']"
+  ></exchange-input>
   <p-button class="mt-auto" label="Convert" />
-  <div>
-    <label for="to" class="font-bold block"> To </label>
-    <p-dropdown
-      formControlName="to"
-      [options]="cities"
-      optionLabel="name"
-      placeholder="Select a City"
-    />
-  </div>
-  <div>
-    <label for="buy" class="font-bold block"> Buy </label>
-    <p-inputNumber inputId="buy" formControlName="amount" class="w-full" />
-  </div>
-  <div>
-    <label for="sell" class="font-bold block"> Sell </label>
-    <p-inputNumber inputId="sell" formControlName="amount" class="w-full" />
-  </div>
+  <exchange-input
+    [currencies]="currencies$()"
+    [formGroupRef]="exchangeForm().controls['toGroup']"
+  ></exchange-input>
 </div>
+  </div>
 
-</form>
+}

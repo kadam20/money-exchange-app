@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { Component, OnInit, signal } from '@angular/core';
+import { FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { Currency } from '../../models/currency.model';
+import { Store } from '@ngrx/store';
+import { selectAllCurrencies } from '../../state/currency/currency.selector';
+import { FormsModule } from '@angular/forms';
+import { ExchangeInputComponent } from './exchange-input/exchange-input.component';
+import { CurrencyForm } from '../../models/form.models';
 
 @Component({
   selector: 'app-exchange',
@@ -19,27 +20,33 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     ButtonModule,
     ReactiveFormsModule,
     KeyFilterModule,
+    FormsModule,
+    ExchangeInputComponent,
   ],
   templateUrl: './exchange.component.html',
   styleUrl: './exchange.component.scss',
 })
-export class ExchangeComponent {
-  exchangeForm: FormGroup;
-  cities: any;
+export class ExchangeComponent implements OnInit {
+  exchangeForm = signal<CurrencyForm>(
+    new FormGroup({
+      fromGroup: new FormGroup({
+        currency: new FormControl(),
+        amount: new FormControl(),
+      }),
+      toGroup: new FormGroup({
+        currency: new FormControl(),
+        amount: new FormControl(),
+      }),
+    })
+  );
+  currencies$ = signal<Currency[]>([]);
 
-  constructor(private fb: FormBuilder) {
-    this.exchangeForm = this.fb.group({
-      amount: ['', Validators.required],
-      from: ['', [Validators.required, Validators.email]],
-      to: ['', [Validators.required, Validators.min(18)]],
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.store.select(selectAllCurrencies as any).subscribe((data: any) => {
+      this.currencies$.set(data.currencies);
     });
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' },
-    ];
   }
 
   convert() {}

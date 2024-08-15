@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { selectCurrencyByName } from '../../state/currency/currency.selector';
+import { Currency } from '../../models/currency.model';
 
 @Component({
   selector: 'app-history',
@@ -26,7 +29,16 @@ export class HistoryComponent implements OnInit {
     { icon: 'pi pi-align-center', justify: 'Center' },
     { icon: 'pi pi-align-justify', justify: 'Justify' },
   ];
+
+  favCurrency = signal<Currency>({} as Currency);
+
+  constructor(public store: Store) {}
+
   ngOnInit() {
+    this.store
+      .select(selectCurrencyByName as any)
+      .subscribe((data) => this.favCurrency.set(data as Currency));
+    console.log('data', this.favCurrency());
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
     const textColorSecondary = documentStyle.getPropertyValue(

@@ -6,6 +6,7 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { currencyReducer } from './state/currency/currency.redurer';
 import { CurrencyEffects } from './state/currency/currency.effects';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,5 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideStore({ currencies: currencyReducer }),
     provideEffects(CurrencyEffects),
+    provideAnimations(),
   ],
 };
