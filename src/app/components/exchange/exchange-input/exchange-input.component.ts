@@ -17,7 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
           [options]="currencies()"
           optionLabel="name"
           placeholder="Select a Currency"
-          styleClass="w-56"
+          styleClass="w-36"
           formControlName="currency"
         >
           <ng-template pTemplate="selectedItem">
@@ -50,14 +50,13 @@ import { ReactiveFormsModule } from '@angular/forms';
         <label for="amount" class="font-bold block"> Amount </label>
         <p-inputNumber
           inputId="amount"
-          styleClass="w-56"
+          styleClass="w-36"
           formControlName="amount"
           [suffix]="
             formGroupRef().controls['currency']!.value
               ? ' ' + formGroupRef().controls['currency']!.value!.sign
               : ''
           "
-          class="w-full"
         />
       </div>
     </form>

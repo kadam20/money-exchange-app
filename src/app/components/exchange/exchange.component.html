@@ -1,17 +1,17 @@
 @if(currencies$()){
-  <div class="card flex flex-col justify-between">
-    <h1>Exchange</h1>
-<div class="flex flex-row gap-5">
-  <exchange-input
-    [currencies]="currencies$()" 
-    [formGroupRef]="exchangeForm().controls['fromGroup']"
-  ></exchange-input>
-  <p-button class="mt-auto" label="Convert" />
-  <exchange-input
-    [currencies]="currencies$()"
-    [formGroupRef]="exchangeForm().controls['toGroup']"
-  ></exchange-input>
-</div>
+<div class="flex flex-col justify-between gap-2 w-full">
+  <h1>Exchange</h1>
+  <div class="flex flex-row gap-5">
+    <exchange-input
+      [currencies]="currencies$()"
+      [formGroupRef]="exchangeForm().controls['fromGroup']"
+    ></exchange-input>
+    <p-button class="mt-auto" label="Convert" />
+    <exchange-input
+      [currencies]="currencies$()"
+      [formGroupRef]="exchangeForm().controls['toGroup']"
+    ></exchange-input>
   </div>
+</div>
 
 }

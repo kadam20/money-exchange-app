@@ -1,5 +1,15 @@
-.app-container{
-    display: grid;
-    grid-template-columns: 30% 70%;
-    gap: 16px;
+.page-container {
+  background: var(--surface-b);
+  height: 100%;
 }
+
+.app-container {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  gap: 16px;
+}
+.main {
+    padding: 24px 40px;
+    background: var(--surface-a);
+    border-radius: 8px;
+  }
